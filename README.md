@@ -1,7 +1,3 @@
-📄 README.md (Feature 1)
-Real-Time News App — Feature 1 Release
-📰 Real-Time News App (Feature 1)
-
 This branch delivers Feature 1 of the Real-Time News Application.
 It includes a fully working Java web app built with:
 
@@ -52,6 +48,7 @@ Timestamp indicator
 ✔ Externalized API Key
 
 config.properties stores the API key:
+https://newsapi.org/
 
 NEWS_API_KEY=<your_key>
 NEWS_URL=https://newsapi.org/v2/everything?q=
