@@ -1,9 +1,10 @@
 pipeline {
   agent { label 'slave3' }
 	environment {
-    JFROG_URL = 'https://yashusn.jfrog.io/artifactory'
-    REPO_NAME = 'news-app-maven-remote'      // JFrog repo for feature branches
-  }
+  JFROG_URL = 'https://yashusn.jfrog.io/artifactory'
+  REPO_NAME = 'news-app-libs-snapshot-local'   // <<--- use this for feature branches
+}
+
  stages {
     stage('Test') {
       steps {
@@ -36,13 +37,14 @@ pipeline {
 
     stage('Upload to JFrog') {
       steps {
-        withCredentials([string(credentialsId: 'JFROG_API_KEY', variable: 'JFROG_API_KEY')]) {
-          sh """
-            curl -f -H "X-JFrog-Art-Api: ${JFROG_API_KEY}" \
-                -T "${env.ARTIFACT}" \
-                "${JFROG_URL}/${REPO_NAME}/${env.BRANCH_NAME}/${env.ARTIFACT}"
-          """
-        }
+        withCredentials([string(credentialsId: 'jfrog-api-key', variable: 'JFROG_API_KEY')]) {
+  sh """
+    set -o pipefail
+    curl -f -H "X-JFrog-Art-Api: \$JFROG_API_KEY" \
+         -T "${env.ARTIFACT}" \
+         "${JFROG_URL}/${REPO_NAME}/${env.BRANCH_NAME}/${env.ARTIFACT}"
+  """
+}
       }
     }
 	 
