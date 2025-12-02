@@ -5,6 +5,11 @@ pipeline {
     REPO_NAME = 'news-app-libs-snapshot-local'      // JFrog repo for feature branches
   }
  stages {
+	 stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
     stage('Test') {
       steps {
         sh 'mvn test'
