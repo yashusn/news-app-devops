@@ -16,7 +16,7 @@ pipeline {
       steps {
 			sh "sudo rm -rf /opt/tomcat10/webapps/news-app"
 			//sudo rm /opt/tomcat10/webapps/news-app.war
-			sh "sudo cp /home/ubuntu/workspace/news-app-Job_feature-1/target/news-app.war /opt/tomcat10/webapps"
+			sh "sudo cp /home/ubuntu/workspace/news-app-Job_feature-2/target/news-app.war /opt/tomcat10/webapps"
         }
       }
     }
