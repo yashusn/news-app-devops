@@ -1,6 +1,6 @@
 pipeline {
   agent { label 'slave3' }
-
+ stages {
     stage('Test') {
       steps {
         sh 'mvn test'
@@ -20,3 +20,4 @@ pipeline {
         }
       }
     }
+}
