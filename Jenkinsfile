@@ -37,7 +37,7 @@ pipeline {
 
     stage('Upload to JFrog') {
       steps {
-        withCredentials([string(credentialsId: 'jfrog-api-key', variable: 'JFROG_API_KEY')]) {
+        withCredentials([string(credentialsId: 'JFROG_API_KEY', variable: 'JFROG_API_KEY')]) {
   sh """
     set -o pipefail
     curl -f -H "X-JFrog-Art-Api: \$JFROG_API_KEY" \
