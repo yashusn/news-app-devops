@@ -3,12 +3,12 @@ pipeline {
 	environment {
     JFROG_URL = 'https://yashusn.jfrog.io/artifactory'
     REPO_NAME = 'news-app-libs-snapshot-local'      // JFrog repo for feature branches
-    feature1_war = '/home/ubuntu/workspace/news-app-Job_feature-1/target/news-app.war"
+    feature1_war = '/home/ubuntu/workspace/"
     //feature2_war = '/home/ubuntu/workspace/news-app-Job_feature-2/target/news-app.war"
          }
   
  stages {
-   sh "sudo cp ${feature1_war} /home/ubuntu/workspace/news-app-Job_feature-3/target/"
+   sh "sudo cp ${feature1_war}news-app-Job_feature-1/target/news-app.war /home/ubuntu/workspace/news-app-Job_feature-3/target/"
 	  stage('Create Versioned Artifact') {
       steps {
         script {
