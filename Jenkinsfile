@@ -15,7 +15,7 @@ pipeline {
           sh "cp /home/ubuntu/workspace/news-app-Job_feature-1/target/*.war ${env.ARTIFACT}-f1.war"
 		  sh "cp /home/ubuntu/workspace/news-app-Job_feature-2/target/*.war ${env.ARTIFACT}-f2.war"
 		  
-          archiveArtifacts artifacts: "${env.ARTIFACT}.war", fingerprint: true
+          //archiveArtifacts artifacts: "${env.ARTIFACT}.war", fingerprint: true
         }
       }
     }
