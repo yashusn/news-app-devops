@@ -3,7 +3,7 @@ pipeline {
 	environment {
     JFROG_URL = 'https://yashusn.jfrog.io/artifactory'
     REPO_NAME = 'news-app-libs-snapshot-local'      // JFrog repo for feature branches
-    feature1_war = '/home/ubuntu/workspace/"
+    feature1_war = "/home/ubuntu/workspace/"
     //feature2_war = '/home/ubuntu/workspace/news-app-Job_feature-2/target/news-app.war"
          }
   
