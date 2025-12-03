@@ -14,7 +14,7 @@ pipeline {
         checkout scm
       }
     }
-   }
+   
 	  stage('Create Versioned Artifact') {
       steps {
 		  sh "sudo cp /home/ubuntu/workspace/news-app-Job_feature-1/target/news-app.war /home/ubuntu/workspace/news-app-Job_feature-3/target/"
