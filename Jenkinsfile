@@ -4,6 +4,7 @@ pipeline {
     JFROG_URL = 'https://yashusn.jfrog.io/artifactory'
     REPO_NAME = 'news-app-libs-snapshot-local'      // JFrog repo for feature branches
   }
+	stages {
 	 stage('Create Versioned Artifact') {
       steps {
         script {
@@ -36,3 +37,4 @@ pipeline {
       }
     }
     }
+}
