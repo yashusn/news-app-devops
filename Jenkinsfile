@@ -53,10 +53,9 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'JFROG_API_KEY', variable: 'JFROG_API_KEY')]) {
           sh """
-            set -o pipefail
-            curl -f -H "X-JFrog-Art-Api: ${JFROG_API_KEY}" \\
-                 -T "${env.ARTIFACT}" \\
-                 "${JFROG_URL}/${REPO_NAME}/${env.BRANCH_NAME}/${env.ARTIFACT}"
+            curl -f -H "X-JFrog-Art-Api: ${JFROG_API_KEY}" \
+                -T "${env.ARTIFACT}" \
+                "${JFROG_URL}/${REPO_NAME}/${env.BRANCH_NAME}/${env.ARTIFACT}"
           """
         }
       }
