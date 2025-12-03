@@ -1,35 +1,50 @@
 pipeline {
   agent { label 'slave3' }
-	environment {
+  environment {
     JFROG_URL = 'https://yashusn.jfrog.io/artifactory'
-    REPO_NAME = 'news-app-libs-snapshot-local'      // JFrog repo for feature branches
-    //feature1_war = "/home/ubuntu/workspace/"
-    //feature2_war = '/home/ubuntu/workspace/news-app-Job_feature-2/target/news-app.war"
-         }
-  
- stages {
-
-	 stage('Checkout') {
+    REPO_NAME = 'news-app-libs-snapshot-local'
+  }
+  stages {
+    stage('Checkout') {
       steps {
         checkout scm
       }
     }
-   
-	  stage('Create Versioned Artifact') {
+
+    stage('Build') {
       steps {
-		  sh "sudo cp -R /home/ubuntu/workspace/news-app-Job_feature-1/target/news-app.war /home/ubuntu/workspace/news-app-Job_feature-3/target/"
+        // Run your build to produce target/*.war
+        sh 'mvn -B clean package'
+      }
+    }
+
+    stage('Create Versioned Artifact') {
+      steps {
         script {
-          def sha = sh(
-            script: 'git rev-parse --short HEAD',
-            returnStdout: true
-          ).trim()
-
-          def branchSafe = env.BRANCH_NAME.replaceAll('[^a-zA-Z0-9_.-]', '_')
-
+          // short commit SHA
+          def sha = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+          // sanitize branch name
+          def branchSafe = (env.BRANCH_NAME ?: 'no-branch').replaceAll('[^a-zA-Z0-9_.-]', '_')
           env.ARTIFACT = "news-app-${branchSafe}-${env.BUILD_NUMBER}-${sha}.war"
 
-          sh "cp target/*.war ${env.ARTIFACT}"
+          // Ensure target exists
+          sh 'mkdir -p target'
+
+          // Find the built war
+          def warFiles = sh(script: "ls target/*.war 2>/dev/null || true", returnStdout: true).trim()
+          if (!warFiles) {
+            error "No WAR produced in target/ — build failed or produced no .war files."
+          }
+
+          // If more than one war, pick the first; otherwise pick the single war
+          def warToUse = warFiles.split('\\n')[0].trim()
+
+          // Copy/rename into workspace root (or keep under target)
+          sh "cp \"${warToUse}\" \"${env.ARTIFACT}\""
+
+          // Archive artifact
           archiveArtifacts artifacts: "${env.ARTIFACT}", fingerprint: true
+          echo "Created artifact: ${env.ARTIFACT}"
         }
       }
     }
@@ -38,12 +53,13 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'JFROG_API_KEY', variable: 'JFROG_API_KEY')]) {
           sh """
-            curl -f -H "X-JFrog-Art-Api: ${JFROG_API_KEY}" \
-                -T "${env.ARTIFACT}" \
-                "${JFROG_URL}/${REPO_NAME}/${env.BRANCH_NAME}/${env.ARTIFACT}"
+            set -o pipefail
+            curl -f -H "X-JFrog-Art-Api: ${JFROG_API_KEY}" \\
+                 -T "${env.ARTIFACT}" \\
+                 "${JFROG_URL}/${REPO_NAME}/${env.BRANCH_NAME}/${env.ARTIFACT}"
           """
         }
       }
     }
-    }
+  }
 }
