@@ -64,10 +64,11 @@ pipeline {
 			sh "sudo rm -rf /opt/tomcat10/webapps/news-app"
 			//sudo rm /opt/tomcat10/webapps/news-app.war
 //<<<<<<< HEAD
-			sh "sudo cp /home/ubuntu/workspace/news-app-Job_feature-2/target/news-app.war /opt/tomcat10/webapps"
+			//sh "sudo cp /home/ubuntu/workspace/news-app-Job_feature-2/target/news-app.war /opt/tomcat10/webapps"
 //=======
-			sh "sudo cp /home/ubuntu/workspace/news-app-Job_feature-1/target/news-app.war /opt/tomcat10/webapps"
+			//sh "sudo cp /home/ubuntu/workspace/news-app-Job_feature-1/target/news-app.war /opt/tomcat10/webapps"
 //>>>>>>> main
+		  sh "sudo cp /home/ubuntu/workspace/news-app-Job_main/target/news-app.war /opt/tomcat10/webapps"
 		  		  	sh "sudo /opt/tomcat10/bin/shutdown.sh"
 			sh "sudo /opt/tomcat10/bin/startup.sh"
         }
