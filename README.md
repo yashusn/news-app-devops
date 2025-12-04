@@ -1,8 +1,80 @@
+<<<<<<< HEAD
 ## 📌 Requirements to Install
 
 ### **1. Install Java 17**
 
 ```bash
+=======
+This branch delivers Feature 1 of the Real-Time News Application.
+It includes a fully working Java web app built with:
+
+Servlet (Jakarta 5)
+
+JSP
+
+Maven (WAR packaging)
+
+Tomcat 10
+
+NewsAPI (Free “everything” endpoint)
+
+The UI auto-refreshes, shows today’s news, and includes a clean, modern layout using plain CSS.
+
+✨ Feature 1 – What’s Included
+✔ Fetch Real-Time News
+
+The servlet fetches news from NewsAPI using the /v2/everything endpoint.
+
+✔ Auto-Refresh
+
+The page refreshes automatically every 30 seconds to show fresh headlines.
+
+✔ Today’s News Only
+
+Backend filters news by today’s date using:
+
+from=<today>&to=<today>
+
+
+If today’s news is empty, it falls back to last 7 days.
+
+✔ Clean Modern UI
+
+Index page uses:
+
+Card-based layout
+
+Hover animations
+
+Centered header
+
+Responsive layout
+
+Timestamp indicator
+
+✔ Externalized API Key
+
+config.properties stores the API key:
+https://newsapi.org/
+
+NEWS_API_KEY=<your_key>
+NEWS_URL=https://newsapi.org/v2/everything?q=
+
+✔ Error Handling
+
+If no news found → clean fallback text
+If API returns error → servlet does not crash
+
+📂 Project Structure
+src/main/java/com/vikas/news/NewsServlet.java
+src/main/resources/config.properties
+src/main/webapp/index.jsp
+src/main/webapp/WEB-INF/web.xml
+pom.xml
+
+🛠 Installation & Setup (Ubuntu)
+1. Install Java 17 and Maven
+>>>>>>> main
 sudo apt update
 sudo apt install openjdk-17-jdk -y
 java -version
