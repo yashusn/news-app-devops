@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## 📌 Requirements to Install
 
 ### **1. Install Java 17**
