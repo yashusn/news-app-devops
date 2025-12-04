@@ -32,7 +32,7 @@ pipeline {
           archiveArtifacts artifacts: "${env.ARTIFACT}", fingerprint: true
         }
       }
-    }
+ 
 
     stage('Upload to JFrog') {
       steps {
@@ -56,3 +56,4 @@ pipeline {
         }
       }
     }
+	   }
