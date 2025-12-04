@@ -24,17 +24,11 @@ pipeline {
     }
 	 stage('Create Versioned Artifact') {
       steps {
-        script {
-          def sha = sh(
-            script: 'git rev-parse --short HEAD',
-            returnStdout: true
-          ).trim()
-
           def branchSafe = env.BRANCH_NAME.replaceAll('[^a-zA-Z0-9_.-]', '_')
 
-          env.ARTIFACT = "news-app-${branchSafe}-${env.BUILD_NUMBER}-${sha}.war"
+          env.ARTIFACT = "news-app-${branchSafe}-${env.BUILD_NUMBER}.jar"
 
-          sh "cp target/*.war ${env.ARTIFACT}"
+          sh "cp target/*.jar ${env.ARTIFACT}"
           archiveArtifacts artifacts: "${env.ARTIFACT}", fingerprint: true
         }
       }
