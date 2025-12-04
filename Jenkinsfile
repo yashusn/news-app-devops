@@ -28,7 +28,7 @@ pipeline {
 
           env.ARTIFACT = "news-app-${branchSafe}-${env.BUILD_NUMBER}.jar"
 
-          sh "cp target/*.jar ${env.ARTIFACT}"
+          sh "cp /home/ubuntu/workspace/parcel-services-job_main/target/*.jar ${env.ARTIFACT}"
           archiveArtifacts artifacts: "${env.ARTIFACT}", fingerprint: true
         }
       }
