@@ -1,17 +1,17 @@
 pipeline {
   agent { label 'slave3' }
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	//declaring JFROG environment
-=======
->>>>>>> main
+//=======
+//>>>>>>> main
 	environment {
     JFROG_URL = 'https://yashusn.jfrog.io/artifactory'
     REPO_NAME = 'news-app-libs-snapshot-local'      // JFrog repo for feature branches
   }
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 	
->>>>>>> main
+//>>>>>>> main
  stages {
 	 stage('Checkout') {
       steps {
@@ -63,11 +63,11 @@ pipeline {
       steps {
 			sh "sudo rm -rf /opt/tomcat10/webapps/news-app"
 			//sudo rm /opt/tomcat10/webapps/news-app.war
-<<<<<<< HEAD
+//<<<<<<< HEAD
 			sh "sudo cp /home/ubuntu/workspace/news-app-Job_feature-2/target/news-app.war /opt/tomcat10/webapps"
-=======
+//=======
 			sh "sudo cp /home/ubuntu/workspace/news-app-Job_feature-1/target/news-app.war /opt/tomcat10/webapps"
->>>>>>> main
+//>>>>>>> main
 		  		  	sh "sudo /opt/tomcat10/bin/shutdown.sh"
 			sh "sudo /opt/tomcat10/bin/startup.sh"
         }
